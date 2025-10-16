@@ -1,4 +1,4 @@
-//Productos
+//Array de Productos
 const productos = [
     //Cocina
     {
@@ -224,21 +224,22 @@ const productos = [
         precio: 11654
     }  
 ];
-
+//Variabes, manejo de DOM
 const contenedorProductos = document.querySelector('#contenedor-productos');
 const botonesCategorias = document.querySelectorAll('.boton-categoria');
 const tituloPrincipal = document.querySelector('#titulo-principal');
 let botonesAgregar = document.querySelectorAll('.producto-agregar');
 const numerito = document.querySelector('#numerito');
 
+//Funcion para mostrar los productos en venta
 function cargarProductos(productosElegidos){
 
     contenedorProductos.innerHTML = "";
 
     productosElegidos.forEach(producto => {
-
+    
         const div = document.createElement('div');
-
+        
         div.classList.add('producto');
 
         div.innerHTML = `
@@ -246,7 +247,7 @@ function cargarProductos(productosElegidos){
 
             <div class="producto-detalles">
                 <h3 class="producto-titulo">${producto.titulo}</h3>
-                <p class="producto-precio">Precio: $${producto.precio}</p>
+                <p class="producto-precio">Precio: $${producto.precio.toLocaleString("es-AR")}</p>
                 <button class="producto-agregar" id="${producto.id}">Agregar</button>
             </div>
         `;
@@ -258,6 +259,7 @@ function cargarProductos(productosElegidos){
 
 cargarProductos(productos);
 
+//Manejo de eventos en el menu, dependiendo la seccion que elija el usuario
 botonesCategorias.forEach(boton => {
     boton.addEventListener('click', (e) => {
         
@@ -278,6 +280,7 @@ botonesCategorias.forEach(boton => {
     })
 });
 
+//En caso de que el usuario presione el boton de "Agregar", agrega el producto al carriot
 function actualizarBotonesAgregar(){
     botonesAgregar = document.querySelectorAll('.producto-agregar');
 
@@ -286,17 +289,7 @@ function actualizarBotonesAgregar(){
     })
 }
 
-let productosEnCarrito;
-
-let productosEnCarritoLocalStorage = localStorage.getItem('productosEnCarrito');    
-
-if(productosEnCarritoLocalStorage){
-    productosEnCarrito = JSON.parse(productosEnCarritoLocalStorage);
-    actualizarNumerito();
-}else{
-    productosEnCarrito = [];
-}
-
+//Funcion para agregar productos al carrito
 function agregarAlCarrito(e){
     const idBoton = e.currentTarget.id;
 
@@ -315,6 +308,19 @@ function agregarAlCarrito(e){
     localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
 }
 
+//Guarda en LocalStorage el carrito del usuario
+let productosEnCarrito;
+
+let productosEnCarritoLocalStorage = localStorage.getItem('productosEnCarrito');    
+
+if(productosEnCarritoLocalStorage){
+    productosEnCarrito = JSON.parse(productosEnCarritoLocalStorage);
+    actualizarNumerito();
+}else{
+    productosEnCarrito = [];
+}
+
+//Actualiza el numero de productos en el menu, en la seccion "Carrito"
 function actualizarNumerito(){
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
     numerito.innerText = nuevoNumerito;

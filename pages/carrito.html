@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!--Metadatos-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bazar - Compras</title>
+    <!--Titulo-->
+    <title>BazarShop - Carrito de Compras</title>
+    <!--Iconos de Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!--Estilos-->
     <link rel="stylesheet" href="../css/style.css">
-
 </head>
 <body>
-
+    <!--Contenedor principal-->
     <div class="contenedor">
-        <aside>
-            <header>
-                <h1 class="logo">BazarShop</h1>
-            </header>
 
+        <!--Header para dispositivos moviles-->
+        <header class="header-mobile">
+            <!--Logo-->
+            <a href="../index.html"><h1 class="logo">BazarShop</h1></a>
+            <!--Boton para abrir el menu-->
+            <button class="open-menu" id="open-menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </header>
+
+        <!--Aside donde se encuentra el navegador-->
+        <aside>
+            <!--Boton para cerrar menu en dispositivos moviles-->
+            <button class="close-menu" id="close-menu">
+                <i class="bi bi-x"></i>
+            </button>
+            <!--Logo-->
+            <header>
+                <a href="../index.html"><h1 class="logo-aside">BazarShop</h1></a>
+            </header>
+            <!--Navegador-->
             <nav>
                 <ul>
+                    <!--Seccion "Seguir comprando". Redirige a la pagina principal-->
                     <li>
                         <a class="boton-menu boton-volver" href="../index.html">
                             <i class="bi bi-arrow-return-left"></i> Seguir comprando
                         </a>
                     </li>
+                    <!--Seccion "Carrito"-->
                     <li>
                         <a class="boton-menu boton-carrito active" href="./pages/carrito.html">
                             <i class="bi bi-cart-fill"></i> Carrito
@@ -30,44 +52,51 @@
                     </li>
                 </ul>
             </nav>
-
+            
+            <!--Footer del aside-->
             <footer>
                 <p class="texto-footer">© Todos los derechos reservados </p>
             </footer>
         </aside>
 
+        <!--Contenido principal. Se muestra el carrito de compras, donde se detalla la imagen del producto, el titulo, cantidad, precio, subtotal y total de la compra. En esta seccion, el usuario puede finalizar la compra-->
         <main>
+            <!--Titulos-->
             <h2 class="titulo-principal">Carrito</h2>
-
+            <!--Contenido del carrito-->
             <div class="contenedor-carrito">
+                <!--Se muestra, mediante Javascript, si el carrito esta vacio-->
                 <p class="carrito-vacio" id="carrito-vacio">Tu carrito esta vacío.</p>
 
+                <!--En caso de que el carrito no este vacio, se muestra los productos seleccionados. Eso se completa con Javascript-->
                 <div class="carrito-productos disabled" id="carrito-productos">
                     <!--Se completa con JavaScript-->
                 </div>
 
-                
-
-                <div class="carrito-acciones disabled" id="carrito-acciones">
+                <!--Se muestro si el carrito no esta vacio. Se muestra el total de la compra y le da la opcion al usuario de vaciar el carrito o de finalizar la compra-->
+                <div class="carrito-acciones disabled" id   ="carrito-acciones">
+                    <!--Boton para vaciar el carrito-->
                     <div class="carrito-acciones-izquierda">
                         <button class="carrito-acciones-vaciar" id="carrito-acciones-vaciar">Vaciar Carrito</button>
-                    </div>
-
+                    </div>      
+                    <!--Importe total de la compra-->
                     <div class="carrito-acciones-derecha">
                         <div class="carrito-acciones-total">
                             <p>Total:</p>
                             <p id="total"></p>
                         </div>
-
+                        <!--Boton para finalizar la compra-->
                         <button class="carrito-acciones-comprar" id="carrito-acciones-comprar">Comprar ahora</button>
                     </div>
                 </div>
+                <!--Mensaje en caso de que la compra fue finalizada-->
                 <p class="carrito-comprado disabled" id="carrito-comprado">Muchas gracias por tu compra.</p>
             </div>
         </main>
-
     </div>
     
+    <!--Scripts de Javascript-->
     <script src="../js/carrito.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 </html>

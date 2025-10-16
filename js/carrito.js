@@ -1,6 +1,8 @@
+//LocalStorage para almacenar los datos del carrito
 let productosEnCarrito = localStorage.getItem('productosEnCarrito');
 productosEnCarrito = JSON.parse(productosEnCarrito);
 
+//Variables y manejo de DOM
 const carritoVacio = document.querySelector('#carrito-vacio');
 const carritoProductos = document.querySelector('#carrito-productos');
 const carritoAcciones = document.querySelector('#carrito-acciones');
@@ -10,7 +12,9 @@ const botonVaciar = document.querySelector('#carrito-acciones-vaciar');
 const total = document.querySelector('#total');
 const botonComprar = document.querySelector('#carrito-acciones-comprar');
 
+//Funcion para cargar productos en el carrito
 function cargarProductosCarrito(){
+    //Validacion para que en caso de que se haya seleccionado productos en el carrito aparezcan en la pagina "Carrito"
     if(productosEnCarrito && productosEnCarrito.length>0){
 
         carritoVacio.classList.add('disabled');
@@ -20,9 +24,14 @@ function cargarProductosCarrito(){
 
         carritoProductos.innerHTML = "";
 
+        //Carga las etiquetas correspondientes para mostrar los productos en el carrito
         productosEnCarrito.forEach(producto => {
+            
+            //Se crea el div
             const div = document.createElement('div');
+            //Se crea la clase 'carrito-producto'
             div.classList.add('carrito-producto');
+
             div.innerHTML = `
                 <img class="carrito-producto-imagen" src=".${producto.imagen}" alt="${producto.titulo}">
 
@@ -38,23 +47,27 @@ function cargarProductosCarrito(){
 
                 <div class="carrito-producto-precio">
                     <small>Precio</small>
-                    <p>$${producto.precio}</p>
+                    <p>$${producto.precio.toLocaleString("es-AR")}</p>
                 </div>
 
                 <div class="carrito-producto-subtotal">
                     <small>Subtotal</small>
-                    <p>$${producto.precio * producto.cantidad}</p>
+                    <p>$${(producto.precio * producto.cantidad).toLocaleString("es-AR")}</p>
                 </div>
 
                 <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash-fill"></i></button>
             `;
 
+            //Se agregan las etiquetas en el div
             carritoProductos.append(div);
             })
 
+
             actualizarBotonesEliminar();
             actualizarTotal();  
-    }else{
+    }
+    //En caso de que no haya productos se muestra el mensaje "El carrito esta vacio"
+    else{
         carritoVacio.classList.remove('disabled');
         carritoProductos.classList.add('disabled');
         carritoAcciones.classList.add('disabled');
@@ -66,7 +79,7 @@ function cargarProductosCarrito(){
 
 cargarProductosCarrito();
 
-
+//Manejo de eventos en boton eliminar
 function actualizarBotonesEliminar(){
     botonesEliminar = document.querySelectorAll('.carrito-producto-eliminar');
 
@@ -75,6 +88,7 @@ function actualizarBotonesEliminar(){
     })
 }
 
+//Funcion para eliminar un producto del carrito
 function eliminarDelCarrito(e){
     const idBoton = e.currentTarget.id;
     const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
@@ -83,9 +97,9 @@ function eliminarDelCarrito(e){
     cargarProductosCarrito();
 
     localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
-    
 }
 
+//Funcion para vaciar el carrito
 botonVaciar.addEventListener('click', vaciarCarrito);
 
 function vaciarCarrito(){
@@ -94,11 +108,13 @@ function vaciarCarrito(){
     cargarProductosCarrito();
 }
 
+//Funcion para calcular el total del carrito
 function actualizarTotal(){
     const totalCalculado = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
-    total.innerText = `$${totalCalculado}`;
+    total.innerText = `$${totalCalculado.toLocaleString("es-AR")}`;
 }
 
+//Funcion para finalizar la compra del carrito
 botonComprar.addEventListener('click', comprarCarrito);
 
 function comprarCarrito(){

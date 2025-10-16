@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!--Metadatos-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bazar - Compras</title>
+    <!--Titulo-->
+    <title>BazarShop - Home</title>
+    <!--Iconos de Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!--Estilos-->
     <link rel="stylesheet" href="./css/style.css">
-
 </head>
 <body>
+    <!--Contenedor principal-->
     <div class="contenedor">
-        <aside>
-            <header>
-                <h1 class="logo">BazarShop</h1>
-            </header>
 
+        <!--Header para dispositivos moviles-->
+        <header class="header-mobile">
+            <!--Logo-->
+              <a href="index.html"><h1 class="logo">BazarShop</h1></a>
+            <!--Boton para abrir el menu-->
+            <button class="open-menu" id="open-menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </header>
+
+        <!--Aside donde se encuentra el navegador-->
+        <aside>
+            <!--Boton para cerrar menu en dispositivos moviles-->
+            <button class="close-menu" id="close-menu">
+                <i class="bi bi-x"></i>
+            </button>
+            <!--Logo-->
+            <header>
+                <a href="index.html"><h1 class="logo-aside">BazarShop</h1></a>
+            </header>
+            <!--Navegador-->
             <nav>
                 <ul class="menu">
+                    <!--Seccion "Todos los productos"-->
                     <li>
                         <button id="todos" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i> Todos los Productos</button>
                     </li>
+                    <!--Seccion "Cocina"-->
                     <li>
                         <button id="cocina" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Cocina</button>
                     </li>
+                    <!--Seccion "Mesa"-->
                     <li>
                         <button id="mesa" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Mesa</button>
                     </li>
+                    <!--Seccion "Baño"-->
                     <li>
                         <button id="bano" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Baño</button>
                     </li>
+                    <!--Se dirige al carrito de compras. Indica, ademas, la cantidad de productos que se encuentra en el carrito-->
                     <li>
                         <a class="boton-menu boton-carrito" href="./pages/carrito.html">
                             <i class="bi bi-cart-fill"></i> Carrito <span class="numerito" id="numerito">0</span>
@@ -37,11 +63,13 @@
                 </ul>
             </nav>
 
+            <!--Footer del aside-->
             <footer>
                 <p class="texto-footer">© Todos los derechos reservados </p>
             </footer>
         </aside>
 
+        <!--Contenido principal. Se muestras los productos en venta. Con Javascript se muestra la seccion de acuerdo al boton que presione el usuario-->
         <main>
             <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
 
@@ -49,9 +77,10 @@
                 <!--Se completa con JavaScript-->
             </div>
         </main>
-
     </div>
 
+    <!--Scripts de Javascript-->
     <script src="./js/main.js"></script>
+    <script src="./js/menu.js"></script>
 </body>
 </html>
