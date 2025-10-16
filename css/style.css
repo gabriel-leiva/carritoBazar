@@ -113,7 +113,6 @@ aside{
     box-shadow: 0 -1rem 0 var(--color-white);
 }
 
-.boton-categoria > i.bi-hand-index-thumb-fill,
 .boton-categoria > i.bi-hand-index-thumb{
     transform: rotateZ(90deg);
 }
